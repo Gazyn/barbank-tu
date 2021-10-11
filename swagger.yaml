@@ -42,7 +42,7 @@ paths:
               examples:
                 Username Already exists:
                   value:
-                    error: Username Already exists
+                    error: Username already exists
           description: Username already exists
         '422':
           content:
@@ -85,10 +85,10 @@ paths:
               schema:
                 $ref: '#/components/schemas/error'
               examples:
-                '''Required parameter missing':
+                'Required parameter missing':
                   value:
-                    error: '''Required parameter missing'
-          description: '''Required parameter missing'
+                    error: 'Required parameter missing'
+          description: 'Required parameter missing'
         '401':
           content:
             application/json:
@@ -105,7 +105,7 @@ paths:
         - session
       responses:
         '204':
-          description: Session Deleted successfully
+          description: Session deleted successfully
         '400':
           content:
             application/json:
