@@ -20,17 +20,20 @@ paths:
         - users
       responses:
         '201':
-          description: Created
+          description: Successful response
         '400':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/error'
               examples:
-                Parameter(s) missing:
+                user validation failed:
                   value:
-                    error: some text
-          description: user validation failed
+                    error: >-
+                      user validation failed: (?<parameterName>[^:]+): Path
+                      `(?<parameterNameAgain>[^`]+)` is required.(, ([^:]+): Path
+                      `([^`]+)` is required.){0,2}
+          description: Parameter missing
         '409':
           content:
             application/json:
@@ -57,6 +60,79 @@ paths:
       operationId: createuser
       summary: Create a user
       description: Creates a new instance of a `user`.
+  /sessions:
+    post:
+      requestBody:
+        description: A new 'session' to be created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+            examples:
+              POST / session request:
+                value:
+                  username: megaman
+                  password: whenthe
+        required: true
+      tags:
+        - session
+      responses:
+        '201':
+          description: Successful response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                '''Required parameter missing':
+                  value:
+                    error: '''Required parameter missing'
+          description: '''Required parameter missing'
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                Invalid credentials:
+                  value:
+                    error: Invalid credentials
+          description: Invalid credentials
+      summary: Path used to manage the list of sessions
+    delete:
+      tags:
+        - session
+      responses:
+        '204':
+          description: Session Deleted successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                Invalid authorization format:
+                  value:
+                    error: Invalid authorization format
+          description: Bad Request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+              examples:
+                Missing authorization:
+                  value:
+                    error: Missing authorization
+                Invalid Token:
+                  value:
+                    error: Invalid Token
+          description: Problem with authorization
+      security:
+        -
+          bearer: []
+      summary: Delete session
 components:
   schemas:
     user:
@@ -71,9 +147,9 @@ components:
         name:
           type: string
       example:
-        username: Miki
-        password: qwertyqwerty
-        name: Miki Hiir
+        username: bunger
+        password: bungerx2
+        name: Bunger
     error:
       title: Root Type for error
       description: ''
@@ -83,7 +159,23 @@ components:
           type: string
       example:
         error: some text
+    session:
+      title: Root Type for Session
+      description: ''
+      type: object
+      properties:
+        token:
+          type: string
+      example:
+        token: 616037440515e7a599aad56c
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      type: http
 tags:
   -
     name: users
+    description: ''
+  -
+    name: session
     description: ''
