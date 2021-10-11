@@ -1,0 +1,23 @@
+{
+  "name": "bungus",
+  "version": "1.0.0",
+  "description": "suuup",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "shungus"
+  ],
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0",
+    "mongoose": "^6.0.8",
+    "swagger-ui-express": "^4.1.6"
+  }
+}
