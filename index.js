@@ -22,6 +22,7 @@ require("dotenv").config()
 //register routes
 app.use('/users', require('./routes/users'))
 app.use('/sessions', require('./routes/sessions'))
+app.use('/transactions', require('./routes/transactions'))
 
 //open connection to mongodb
 mongoose.connect(process.env.MONGODB_URL, function(err) {

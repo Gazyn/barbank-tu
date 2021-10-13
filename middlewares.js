@@ -1,6 +1,6 @@
 const Session = require('./models/Session');
 
-exports.verifyToken=  async function (req, res, next) {
+exports.verifyToken = async function (req, res, next) {
 
     // Check Authorization header existence
     if (!req.header('authorization')) {
